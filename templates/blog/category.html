@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load markdownify %}
+
+{% block title %}{{ category.name }}{% endblock %}
+
+{% block content %}
+<div class="posts-container">
+    <h1 class="section-title">Category: {{ category.name }}</h1>
+    
+    {% for post in posts %}
+    <article class="post-card">
+        <div class="post-meta">
+            <span class="post-date">{{ post.created_on|date:"F d, Y" }}</span>
+            <span class="post-author">by {{ post.author.get_full_name|default:post.author.username }}</span>
+        </div>
+        <h2 class="post-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
+        <div class="post-categories">
+            {% for category in post.categories.all %}
+            <a href="{{ category.get_absolute_url }}" class="category-tag">{{ category.name }}</a>
+            {% endfor %}
+        </div>
+        <div class="post-excerpt">
+            {{ post.content|markdownify|truncatewords_html:50 }}
+        </div>
+        <a href="{{ post.get_absolute_url }}" class="read-more">Read more</a>
+    </article>
+    {% empty %}
+    <div class="no-posts">
+        <p>No posts available in this category yet.</p>
+    </div>
+    {% endfor %}
+
+    {% if is_paginated %}
+    <div class="pagination">
+        {% if page_obj.has_previous %}
+        <a href="?page=1" class="pagination-link">&laquo; First</a>
+        <a href="?page={{ page_obj.previous_page_number }}" class="pagination-link">Previous</a>
+        {% endif %}
+
+        <span class="pagination-current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+        </span>
+
+        {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}" class="pagination-link">Next</a>
+        <a href="?page={{ page_obj.paginator.num_pages }}" class="pagination-link">Last &raquo;</a>
+        {% endif %}
+    </div>
+    {% endif %}
+</div>
+{% endblock %} 

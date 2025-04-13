@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>&lt;/&gt; {% block title %}C0D3_V1B3{% endblock %}</title>
+    <!-- Modern nerdy CSS -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- Programming Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Roboto+Mono:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <div class="page-container">
+        <header class="site-header">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="{% url 'blog:home' %}"><span class="bracket">[</span>C0D3<span>_V1B3</span><span class="bracket">]</span></a>
+                </div>
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="{% url 'blog:home' %}">~$ ./home</a></li>
+                        <li><a href="{% url 'blog:about' %}">~$ ./about</a></li>
+                    </ul>
+                </nav>
+                <button class="menu-toggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </header>
+
+        <div class="content-container">
+            <main class="main-content">
+                {% if messages %}
+                <div class="messages">
+                    {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                
+                {% block content %}{% endblock %}
+            </main>
+
+            <aside class="sidebar">
+                <div class="sidebar-content">
+                    <div class="sidebar-section">
+                        <h3>// CATEGORIES</h3>
+                        <ul class="category-list">
+                            {% for category in categories %}
+                            <li><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></li>
+                            {% empty %}
+                            <li>No categories yet</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    
+                    <div class="sidebar-section">
+                        <h3>// ARCHIVES</h3>
+                        <ul class="archive-list">
+                            {% for year, months in archives.items %}
+                            <li class="archive-year">
+                                <a href="{% url 'blog:archive_year' year %}">{{ year }}</a>
+                                <ul class="archive-months">
+                                    {% for month in months %}
+                                    <li>
+                                        <a href="{% url 'blog:archive_month' year month.month %}">
+                                            {{ month|date:"F" }}
+                                        </a>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                            {% empty %}
+                            <li>No archives yet</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <footer class="site-footer">
+            <div class="footer-content">
+                <p>&copy; {% now "Y" %} C0D3_V1B3 | <span class="matrix-code">01001110 01100101 01110010 01100100</span></p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="{% static 'js/main.js' %}"></script>
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html> 

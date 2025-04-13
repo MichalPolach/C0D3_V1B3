@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load markdownify %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+<article class="post-detail">
+    <header class="post-header">
+        <div class="post-meta">
+            <span class="post-date">{{ post.created_on|date:"F d, Y" }}</span>
+            <span class="post-author">by {{ post.author.get_full_name|default:post.author.username }}</span>
+        </div>
+        <h1 class="post-title">{{ post.title }}</h1>
+        <div class="post-categories">
+            {% for category in post.categories.all %}
+            <a href="{{ category.get_absolute_url }}" class="category-tag">{{ category.name }}</a>
+            {% endfor %}
+        </div>
+    </header>
+
+    <div class="post-content">
+        {{ post.content|markdownify }}
+    </div>
+
+    <div class="post-footer">
+        <div class="post-meta-footer">
+            <span class="post-updated">Last updated: {{ post.updated_on|date:"F d, Y" }}</span>
+        </div>
+    </div>
+</article>
+
+<section class="comments-section">
+    <h2 class="section-title">Comments</h2>
+    
+    {% if comments %}
+    <div class="comments-list">
+        {% for comment in comments %}
+        <div class="comment">
+            <div class="comment-header">
+                <span class="comment-author">{{ comment.name }}</span>
+                <span class="comment-date">{{ comment.created_on|date:"F d, Y" }}</span>
+            </div>
+            <div class="comment-content">
+                {{ comment.content|linebreaks }}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="no-comments">
+        <p>No comments yet. Be the first to comment!</p>
+    </div>
+    {% endif %}
+
+    <div class="comment-form-container">
+        <h3>Leave a Comment</h3>
+        <form method="post" class="comment-form">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="content">Comment</label>
+                <textarea id="content" name="content" rows="4" required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Submit Comment</button>
+        </form>
+    </div>
+</section>
+{% endblock %} 

@@ -1,0 +1,9 @@
+Django==5.2
+markdown==3.8
+sqlparse==0.5.3
+asgiref==3.8.1
+django-markdownify==0.9.5
+django-mdeditor==0.1.20
+bleach==6.2.0
+tinycss2==1.4.0
+webencodings==0.5.1 

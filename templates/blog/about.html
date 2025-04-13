@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %}About{% endblock %}
+
+{% block content %}
+<div class="about-page">
+    <h1 class="section-title">About the Author</h1>
+    
+    <div class="author-profile">
+        <div class="author-image">
+            <!-- Replace with actual author image -->
+            <div class="author-placeholder">
+                <span>Author Photo</span>
+            </div>
+        </div>
+        
+        <div class="author-info">
+            <h2 class="author-name">John Doe</h2>
+            <p class="author-bio">
+                Welcome to my personal blog! I'm a passionate writer and technology enthusiast.
+                This blog is a space where I share my thoughts on various topics including technology,
+                programming, and personal development.
+            </p>
+            <p>
+                I created this blog using Django with a clean, responsive design to provide a great reading experience
+                across all devices. Feel free to explore my posts, leave comments, and connect with me.
+            </p>
+            <p>
+                With a background in computer science and several years of experience in the tech industry,
+                I love sharing insights and learnings from my professional journey.
+            </p>
+        </div>
+    </div>
+    
+    <div class="contact-info">
+        <h3>Get in Touch</h3>
+        <p>If you have any questions or would like to connect, feel free to reach out to me at:</p>
+        <ul class="contact-list">
+            <li><strong>Email:</strong> john.doe@example.com</li>
+            <li><strong>Twitter:</strong> @johndoe</li>
+            <li><strong>GitHub:</strong> github.com/johndoe</li>
+        </ul>
+    </div>
+    
+    <div class="about-blog">
+        <h3>About This Blog</h3>
+        <p>
+            This blog was built using Django, a powerful Python web framework, and uses SQLite for the database.
+            The frontend is created with vanilla HTML, CSS, and JavaScript for a fast and responsive experience.
+        </p>
+        <p>
+            Features include:
+        </p>
+        <ul>
+            <li>Markdown support for rich content</li>
+            <li>Responsive design for all devices</li>
+            <li>Categorized posts for easy navigation</li>
+            <li>Archive system to find older content</li>
+            <li>Comment section for reader engagement</li>
+        </ul>
+    </div>
+</div>
+{% endblock %} 
