@@ -4,7 +4,7 @@ A sleek, programmer-themed blog platform built with Django and simple web techno
 
 **FYI: This is a sample personal project I created in order to actually learn Django.**
 
-![C0D3_V1B3 Screenshot](screenshot.png)
+![C0D3_V1B3 demo](demo.png)
 
 ## ✨ Features
 
@@ -30,19 +30,22 @@ A sleek, programmer-themed blog platform built with Django and simple web techno
 - **Comment Moderation**: Approve or delete comments from admin interface
 - **Drafts System**: Save posts as drafts before publishing
 
+![C0D3_V1B3 admin_page](adminpage.png)
+
+
 ## 🏗️ Architecture
 
 C0D3_V1B3 follows a clean architecture pattern with Django's MVT approach:
 
 - **Models**: Defined in `blog/models.py` with clear relationships
-- **Views**: Class-based views with a custom mixin for shared functionality
+- **Views**: Function-based or alternatively Class-based views with a custom mixin for shared functionality
 - **Templates**: Organized in `templates/` directory with inheritance
 - **Static Files**: CSS and JavaScript in `static/` directory
 
 ### Design Patterns
 
 - **Mixin Pattern**: `BlogContextMixin` provides common context data to all views
-- **Class-Based Views**: Leveraging Django's generic views for common operations
+- **Class-Based Views**: Optional: Leveraging Django's generic views for common operations
 - **Template Inheritance**: Base template with blocks for specialized content
 - **Responsive Design**: Mobile-first CSS with media queries
 
@@ -147,27 +150,18 @@ The site uses a Monokai-inspired color palette defined as CSS variables in `stat
 
 ### Code Organization
 
-- **views.py**: Contains view classes and the shared context mixin
+- **views.py**: Contains view functions (or classes and shared mixins)
 - **models.py**: Defines the database structure
 - **admin.py**: Customizes the admin interface
 - **urls.py**: URL routing configuration
 
 ### Design Decisions
 
-- Used Django's class-based views for maintainability and DRY code
+- Used Django's function-based views and optional class-based views for maintainability and DRY code
 - Implemented a custom mixin to share common context data across views
 - Used vanilla JavaScript instead of frameworks for better performance and fewer dependencies
 - Implemented responsive design with a mobile-first approach
 - Chose Markdown for content to keep the focus on writing and code presentation
-
-### Future Improvements
-
-- User authentication for comments (currently anonymous)
-- Social sharing functionality
-- Search functionality
-- Related posts feature
-- Tag system in addition to categories
-- RSS feed for subscriptions
 
 ## 📄 License
 
